@@ -1,0 +1,34 @@
+<div class="container" *ngIf="allData">
+  <form [formGroup]="surveyForm">
+    <div formArrayName="questions">
+      <div *ngFor="let question of surveyForm.get('questions').controls; let questionIndex = index" [formGroupName]="questionIndex" class="question-container">
+        <h3 class="question-name">{{ questionIndex + 1 }}. {{ question.get('questionName').value }}</h3>
+        <div style="display: flex; align-items: center;">
+          <input pInputText type="text" class="input" formControlName="questionName" placeholder="Edit question">
+          <div [formGroup]="question.get('questionType')" style="margin-left: 10px;">
+            <p-dropdown class="picker" [options]="questionTypeOptions" formControlName="typeName"
+              (onChange)="handleQuestionTypeChange(questionIndex, $event.value)">
+            </p-dropdown>
+          </div>
+        </div>
+        <ng-container *ngIf="isOptionQuestion(question.get('questionType').get('typeName').value)">
+          <div formArrayName="options">
+            <div *ngFor="let option of question.get('options').controls; let optionIndex = index" [formGroupName]="optionIndex" class="option-container">
+              <input pInputText type="text"  formControlName="optionName" placeholder="Edit option">
+              <p-button type="button" class="remove-option-button" severity="danger" (click)="removeOption(questionIndex, optionIndex)">
+                <i class="pi pi-minus-circle"></i>
+              </p-button>
+            </div>
+            <p-button type="button" class="add-option-button" (click)="addOption(questionIndex)">
+              <i class="pi pi-plus-circle"></i> Add Option
+            </p-button>
+          </div>
+          
+        </ng-container>
+      </div>
+    </div>
+    <p-button type="button" class="submit-button" (click)="handleSubmit()">
+     Update
+    </p-button>
+  </form>
+</div>

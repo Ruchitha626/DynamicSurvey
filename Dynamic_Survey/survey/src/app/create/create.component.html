@@ -1,0 +1,58 @@
+<form [formGroup]="questionsForm">
+    
+     <button type="button" pButton icon="pi pi-plus" label="Create Survey" (click)="showDialog()"></button>
+  
+     <p-dialog header="New Survey" [(visible)]="visible" [modal]="true" [closable]="false">
+       <div class="form-group">
+         <label for="surveyName">Survey Name</label>
+         <input type="text" id="surveyName" pInputText formControlName="surveyName" required>
+       </div>
+   
+       <div class="button-group">
+         <button type="button" pButton icon="pi pi-times" label="Cancel" (click)="onCancel()" class="p-button-secondary"></button>
+         <button type="button" pButton icon="pi pi-check" label="Save" (click)="save()" class="p-button-success"></button>
+       </div>
+     </p-dialog>
+  <div *ngIf="qa">
+    <div class="container">
+      <h1>{{ questionsForm.get('surveyName')?.value }}</h1>
+      <div *ngIf="questions.length > 0">
+        <h2>Current Questions:</h2>
+        <div *ngFor="let q of questions.controls; let i = index" [formGroup]="questionsForm" class="question">
+          <p>{{ q.value.question }}</p>
+          <ng-container [ngSwitch]="q.value.type">
+            <input *ngSwitchCase="'text'" type="text" pInputText formControlName="answer" placeholder="Enter text">
+            <input *ngSwitchCase="'email'" type="email" pInputText formControlName="answer" placeholder="Enter email">
+            <input *ngSwitchCase="'numeric'" type="number" pInputText formControlName="answer" placeholder="Enter number">
+            <p-dropdown *ngSwitchCase="'dropdown'" [options]="q.value.options" formControlName="answer" placeholder="Select option"></p-dropdown>
+            <div *ngSwitchCase="'radio'">
+              <p-radioButton *ngFor="let option of q.value.options" name="answer" formControlName="answer" [value]="option" label="{{ option }}"></p-radioButton>
+            </div>
+            <div *ngSwitchCase="'checkbox'">
+              <p-checkbox *ngFor="let option of q.value.options" name="answer" formControlName="answer" [value]="option" label="{{ option }}"></p-checkbox>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+  
+      <div formGroupName="newQuestion">
+        <h2>Enter your question:</h2>
+        <textarea pInputTextarea formControlName="question" rows="5" cols="30" placeholder="Enter your question"></textarea>
+  
+        <h2>Select answer type:</h2>
+        <p-dropdown [options]="answerTypes" formControlName="answerType" placeholder="Select Answer Type" (onChange)="onAnswerTypeChange($event)"></p-dropdown>
+  
+        <div *ngIf="showOptionsInput">
+          <h2>Enter options (one per line):</h2>
+          <textarea pInputTextarea formControlName="currentOption" rows="5" cols="30" placeholder="Enter options"></textarea>
+          <button pButton label="Add Option" (click)="addOption()"></button>
+        </div>
+      </div>
+  
+      <div class="button-group">
+        <button pButton label="Generate New Question" (click)="handleGenerateNew()"></button>
+        <button pButton label="Done" (click)="handleEndQuestions()"></button>
+      </div>
+    </div>
+  </div>
+</form>

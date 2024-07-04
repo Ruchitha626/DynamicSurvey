@@ -1,0 +1,156 @@
+.container {
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+}
+
+#create {
+  float: right;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.form-group input, .form-group p-dropdown {
+  width: 50%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 70px;
+}
+
+.button-group p-button {
+  width: 100px;
+}
+
+.question {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h4 {
+  margin-bottom: 15px;
+}
+
+small.p-error {
+  color: red;
+  font-size: 0.875em;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-left: 140px;
+}
+
+ul li p-button {
+  margin-left: 10px;
+  padding-right: 500px;
+}
+
+.button-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.left-button {
+  grid-column: 1;
+  text-align: left;
+}
+
+.right-button {
+  grid-column: 2;
+  text-align: right;
+}
+
+.que {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.que label {
+  margin: 0 10px 0 0;
+  flex-shrink: 0;
+  width: 150px;
+  text-align: right;
+}
+
+.que input, .que p-dropdown {
+  flex-grow: 0.5;
+}
+
+.que .p-button {
+  margin-left: 10px;
+}
+
+.options-input {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.options-input label {
+  margin: 0 10px 0 0;
+  flex-shrink: 0;
+  width: 150px;
+  text-align: right;
+}
+
+.options-input input, .options-input p-dropdown {
+  flex-grow: 0;
+}
+
+.options-input .p-button {
+  margin-left: 10px;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.option-item p-button {
+  margin-left: 20px;
+  flex-shrink: 0;
+}
+.no-survey {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  color: #060606;
+  margin-top: 20px;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  text-align: center; /* Center text within the div */
+  height: 15vh; /* Optional: Set height to occupy full viewport height */
+}

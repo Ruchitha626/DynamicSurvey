@@ -1,0 +1,103 @@
+<form [formGroup]="questionsForm">
+  <div *ngIf="shows">
+   
+    <p-dialog header="New Survey" [(visible)]="visible" [modal]="true" [closable]="false"  [style]="{ width: '450px', height: '300px' }">
+      <form [formGroup]="questionsForm">
+        <div class="form-group">
+          <label for="surveyName">Survey Name</label>
+          <input type="text" id="surveyName" pInputText formControlName="surveyName" required>
+        </div>
+        <div *ngIf="questionsForm.get('surveyName').invalid && questionsForm.get('surveyName').touched">
+          <small *ngIf="questionsForm.get('surveyName').errors?.required" class="p-error">Survey Name is required.</small>
+        </div>
+        <div class="button-group">
+          <button type="button" pButton icon="pi pi-times" label="Cancel" (click)="onCancel()" class="p-button-secondary"></button>
+          <button type="button" pButton icon="pi pi-check" label="Save" (click)="save()" class="p-button-success"></button>
+        </div>
+      </form>
+    </p-dialog>
+    
+
+</div>
+<div *ngIf="qa">
+  <div class="container">
+      <h1>{{ questionsForm.get('surveyName')?.value }}</h1>
+
+      <div formGroupName="newQuestion">
+          <div class="que">
+              <label for="question">Question:</label>
+              <input pInputText formControlName="question" placeholder="Enter your question" id="question"/>
+              <div *ngIf="newQuestion.get('question')?.invalid && newQuestion.get('question')?.touched">
+                  <small *ngIf="newQuestion.get('question')?.errors?.['required']" class="p-error">Question is required.</small>
+              </div>
+          </div>
+          
+          <div class="options-input">
+              <label>Options:</label>
+              <p-dropdown formControlName="questionType" [options]="questionType" placeholder="Select answer type" (onChange)="onAnswerTypeChange($event)"></p-dropdown>
+              <div *ngIf="newQuestion.get('questionType')?.invalid && newQuestion.get('questionType')?.touched">
+                  <small *ngIf="newQuestion.get('questionType')?.errors?.['required']" class="p-error">Answer type is required.</small>
+              </div>
+          </div>
+      
+          <div *ngIf="showOptionsInput">
+              <div class="options-input">
+                  <label for="currentOption">Enter options:</label>
+                  <input pInputText formControlName="currentOption" placeholder="Enter an option" id="currentOption"/>
+                  <p-button type="button" (click)="addOption()">Add Option</p-button>
+              </div>
+              <div>
+                  <ul>
+                      <li *ngFor="let option of options.controls; let i = index" class="option-item">
+                          {{ i + 1 }}: {{ option.value }}
+                          <p-button type="button" (click)="removeOption(i)" severity="warning">Remove</p-button>
+                      </li>
+                  </ul>
+              </div>
+              <div *ngIf="options.length === 0 && newQuestion.get('answerType')?.touched">
+                  <small class="p-error">Options are required.</small>
+              </div>
+          </div>
+      </div>
+      <div class="next">
+          <p-button severity="success" label="Next +" data-icon="+" (click)="handleGenerateNew()"></p-button>
+      </div>
+      
+      <div *ngIf="questions.length > 0">
+          <h2>Questions:</h2>
+          <div *ngFor="let q of questions.controls; let i = index" [formGroup]="questionsForm" class="question">
+              <h4>{{ i + 1 }}: {{ q.value.question }}</h4>
+              <ng-container [ngSwitch]="q.value.typeName">
+                  <input *ngSwitchCase="'text'" type="text" pInputText formControlName="answer" placeholder="Enter text">
+                  <input *ngSwitchCase="'email'" type="email" pInputText formControlName="answer" placeholder="Enter email">
+                  <input *ngSwitchCase="'numeric'" type="number" pInputText formControlName="answer" placeholder="Enter number">
+                  <p-dropdown *ngSwitchCase="'dropdown'" [options]="q.value.options" formControlName="answer" placeholder="Select option"></p-dropdown>
+                  <div *ngSwitchCase="'radio'">
+                      <p-radioButton *ngFor="let option of q.value.options" name="answer" formControlName="answer" [value]="option" label="{{ option }}"></p-radioButton>
+                  </div>
+                  <div *ngSwitchCase="'checkbox'">
+                      <p-checkbox *ngFor="let option of q.value.options" name="answer" formControlName="answer" [value]="option" label="{{ option }}"></p-checkbox>
+                  </div>
+                  <div *ngSwitchCase="'rating'">
+                      <p-rating formControlName="answer" name="answer" [stars]="stars" [cancel]="false"></p-rating>
+                  </div>
+                  <div *ngSwitchCase="'pdf'">
+                      <p-fileUpload name="answer" url="/your-upload-url"></p-fileUpload>
+                  </div>            
+              </ng-container>
+          </div>
+      </div>
+
+      <div class="button-container">
+          <p-button severity="danger" label="cancel" (click)="onCancel()" class="left-button"></p-button>
+          <p-button severity="success" label="Done" (click)="handleEndQuestions()" class="right-button"></p-button>
+      </div>
+  </div>
+</div>
+
+</form>
+<p-toast></p-toast>
+<!-- <div *ngIf="data === 'email'">
+  <input type="text">
+</div> -->
+

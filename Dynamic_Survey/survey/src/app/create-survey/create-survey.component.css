@@ -1,0 +1,9 @@
+.box{
+    text-align: center;
+}
+.button{
+    display: flex;
+   justify-content: center;
+    padding-top: 20px;
+    gap: 10px;
+}

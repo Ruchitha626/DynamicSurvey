@@ -1,0 +1,94 @@
+
+<div  class="total">
+<div class="surface-card py-3 px-1 sm:px-6"
+style="border-radius: 2px">   
+<div *ngIf="sign">
+ 
+  <form [formGroup]="userForm">
+    <div class="card">
+      <h2 style="text-align: center;color: rgb(10, 7, 14); margin-bottom: 40px;">Register</h2>
+      <div class="flex flex-column md:flex-row">
+        <div class="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
+          <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+            <div class="any">
+              <label class="w-6rem">Admin Name : </label>
+              <input pInputText id="adminName" placeholder="Enter Name" type="text" class="w-12rem" autocomplete="new-name" formControlName="adminName" />
+            </div>
+            <div *ngIf="userForm.get('adminName').invalid && userForm.get('adminName').touched">
+              <small *ngIf="userForm.get('adminName').errors.required" class="p-error">Admin Name is required.</small>
+              <small *ngIf="userForm.get('adminName').errors.minlength" class="p-error">Admin Name must be at least 4 characters long.</small>
+            </div>
+            
+          </div>
+          <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+            <div class="any">
+              <label class="w-6rem">Admin Email : </label>
+              <input pInputText id="adminEmail" placeholder="Enter Email" type="text" class="w-12rem" autocomplete="new-email" formControlName="adminEmail" />
+            </div>
+            <div *ngIf="userForm.get('adminEmail').invalid && userForm.get('adminEmail').touched">
+              <small *ngIf="userForm.get('adminEmail').errors.required" class="p-error">Admin Email is required.</small>
+              <small *ngIf="userForm.get('adminEmail').errors.email" class="p-error">Admin Email must be valid.</small>
+            </div>
+          </div>
+          <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+            <div class="any">
+              <div class="password-container">
+                <label class="w-6rem">Admin Password : </label>
+
+                <input pInputText id="adminPassword" placeholder="Enter Password" [type]="passwordFieldType" class="w-12rem" autocomplete="new-password" formControlName="adminPassword" />
+            <i *ngIf="adminPassword && adminPassword.length > 0" class="pi" [ngClass]="passwordFieldType === 'password' ? 'pi-eye' : 'pi-eye-slash'" (click)="togglePasswordVisibility()"></i>
+
+              </div>
+            </div>
+            <div *ngIf="userForm.get('adminPassword').invalid && userForm.get('adminPassword').touched">
+              <small *ngIf="userForm.get('adminPassword').errors.required" class="p-error">Password is required.</small>
+              <small *ngIf="userForm.get('adminPassword').errors.minlength" class="p-error">Password have alleast  one Capital letter,  small letter and one special Character and Number </small>
+            </div>
+          </div>
+          <div class="buttons">
+          <p-button label="Login" (click)="logs()" icon="pi pi-user" styleClass="w-10rem mx-auto"></p-button>
+          <p-button label="SignIn" severity="success" (click)="signIn()"  icon="pi pi-user" styleClass="w-10rem mx-auto"></p-button>
+
+        </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="log">
+  <div class="card">
+    <h2 style="text-align: center;color: rgb(10, 7, 7);margin-bottom: 60px;">LogIn</h2>
+    <div class="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
+      <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+        <div class="any">
+          <label class="w-6rem">Admin Name : </label>
+          <input pInputText id="adminName" placeholder="Enter Name" [(ngModel)]="adminName" name="adminName" type="text" class="w-12rem" autocomplete="new-name" required #adminNameInput="ngModel" />
+          <br>
+          <small *ngIf="adminNameInput.invalid && adminNameInput.touched" class="p-error">Admin Name is required.</small>
+        </div>
+      </div>
+      <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+        <div class="any">
+          <div class="password-container">
+            <label class="w-6rem">Admin Password : </label>
+            <input pInputText id="adminPassword" placeholder="Enter Password" [(ngModel)]="adminPassword" name="adminPassword" [type]="passwordFieldType" class="w-12rem" autocomplete="new-password" required #adminPasswordInput="ngModel" />
+            <i *ngIf="adminPassword && adminPassword.length > 0" class="pi" [ngClass]="passwordFieldType === 'password' ? 'pi-eye' : 'pi-eye-slash'" (click)="togglePasswordVisibility()"></i>
+            <br>
+            <small *ngIf="adminPasswordInput.invalid && adminPasswordInput.touched" class="p-error">Password is required.</small>
+          </div>
+        </div>
+      </div>
+      <!-- <h2>{{Message}}</h2> -->
+      <div class="buttons">
+        <p-button label="SignIn" (click)="signn()" icon="pi pi-user" styleClass="w-10rem mx-auto"></p-button> 
+        <p-button label="Login" severity="success" (click)="LogIn(adminNameInput, adminPasswordInput)" icon="pi pi-user" styleClass="w-10rem mx-auto"></p-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+</div>
+<p-toast></p-toast>

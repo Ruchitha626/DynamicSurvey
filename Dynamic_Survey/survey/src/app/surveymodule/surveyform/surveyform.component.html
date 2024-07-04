@@ -1,0 +1,98 @@
+<form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
+
+
+  <div class="some">
+    <label ><h3>User Email:</h3></label>
+    <input pInputText id="UserEmail" type="text" placeholder="Enter Your Email"  autocomplete="new-email" formControlName="UserEmail"/>
+  </div>
+  <div *ngIf="surveyForm.get('UserEmail').invalid && surveyForm.get('UserEmail').touched">
+    <small *ngIf="surveyForm.get('UserEmail').errors.required" class="p-error">User Email is required.</small>
+    <small *ngIf="surveyForm.get('UserEmail').errors.email" class="p-error">User Email must be valid.</small>
+  </div>
+  <h1>{{name}}</h1>
+
+    <div formArrayName="questions">
+      <div *ngFor="let question of questions.controls; let i = index" [formGroupName]="i" class="question-container">
+        <label><span class="question-number">Q{{ i + 1 }}.</span> {{ question.get('questionName')?.value }}</label>
+  
+        <div *ngIf="question.get('questionType')?.value === 'Text'">
+          A:<input pInputText formControlName="answer" placeholder="Enter Your Answer" type="text" />
+        </div>
+  
+        <div *ngIf="question.get('questionType')?.value === 'Email'">
+          A:<input pInputText formControlName="answer"   placeholder="Enter Your Answer" type="email" />
+        </div>
+  
+        <div *ngIf="question.get('questionType')?.value === 'Numeric'">
+          <input pInputText formControlName="answer"  placeholder="Enter Your Answer" type="number" />
+        </div>
+     
+           <div *ngIf="question.get('questionType')?.value === 'Dropdown'">
+     <p-dropdown [options]="getDropdownOptions(question)"
+                  formControlName="answer"
+                  placeholder="Select an Answer"></p-dropdown>
+    </div>
+  
+    <div *ngIf="question.get('questionType')?.value === 'Radio'">
+      <div *ngFor="let option of getOptions(question).controls">
+        <div class="radio-option">
+          <p-radioButton
+            [value]="option.value"
+            formControlName="answer"
+            inputId="{{ option.value }}"
+            name="answer"
+          ></p-radioButton>
+          <label for="{{ option.value }}">{{ option.value }}</label>
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="question.get('questionType')?.value === 'Checkbox'">
+      <div *ngFor="let option of getOptions(question).controls">
+        <div class="checkbox-option">
+          <p-checkbox 
+            formControlName="answer" 
+            inputId="{{ 'option_' + option.value }}" 
+            (click)="getCheckboxValue(option)"  
+            [value]="selectedAnswers"
+            >
+          </p-checkbox>
+          <label for="{{'option_' + option.value}}">{{ option.value }}</label>
+        </div>
+      </div>
+    </div>
+    
+      
+      
+  
+      <div *ngIf="question.get('questionType')?.value === 'rating'">
+        <p-rating formControlName="answer" [cancel]="false" [stars]="5" min="1" max="5"></p-rating>
+      </div>
+      
+  
+      <div *ngIf="question.get('questionType')?.value === 'pdf'">
+       
+        <!-- <p-fileUpload 
+          mode="basic" 
+          chooseLabel="Choose" 
+          chooseIcon="pi pi-upload"
+          [auto]="true"
+          [customUpload]="true"  name="answer" (uploadHandler)="onUpload($event, question)"
+          url="https://www.primefaces.org/cdn/api/upload.php" 
+          accept=".pdf, image/*, .xls, .xlsx" 
+          /> -->
+          
+<div class="card flex justify-content-center">
+
+  <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" 
+  accept="image/*"  (uploadHandler)="onUpload($event, question)"></p-fileUpload>
+</div>
+      </div>
+
+      </div>
+    </div>
+    <div class="submitbutton">
+      <p-button type="submit" severity="success" [disabled]="!surveyForm.valid">Submit</p-button>
+    </div>
+  </form>
+  

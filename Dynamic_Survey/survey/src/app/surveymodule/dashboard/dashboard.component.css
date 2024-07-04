@@ -1,0 +1,63 @@
+/* General toolbar styling */
+.p-toolbar {
+  padding: 0.5rem 1rem; /* Adjust the padding to reduce height */
+  background-color: #939596; /* Optional: change background color */
+}
+
+/* Left group styling */
+.p-toolbar-group-left {
+  display: flex;
+  align-items: center;
+  /* color: red; */
+}
+
+/* Center group styling */
+.p-toolbar-group-center {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  margin: 0 1rem;
+  color: rgb(95, 95, 160);
+}
+
+/* Right group styling */
+.p-toolbar-group-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Specific styles for h1 to reduce its height */
+.p-toolbar-group-center h1 {
+  margin: 0;
+  padding: 0.5rem 0; /* Adjust padding to reduce height */
+  font-size: 1.5rem; /* Adjust font size if needed */
+}
+
+  
+  .content {
+    text-align: center;
+    min-height: 600px;
+  }
+  
+  .p-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  
+  .initial {
+    color: #fff;
+  }
+  
+  .p-list li {
+    margin-bottom: 1rem;
+  }
+  
+  .custom-sidebar {
+    width: 30px; 
+  }
+  
+  .custom-sidebar .p-sidebar-content {
+    width: 60%;
+  }
+  

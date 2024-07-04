@@ -1,0 +1,30 @@
+
+<p-toolbar styleClass="p-mb-4">
+    <div class="p-toolbar-group-left">
+        <button type="button" pButton icon="pi pi-bars" (click)="toggleMenu()" ></button>
+        <div class="p-toolbar-group-center">
+            <h1>Survey Application</h1>
+        </div>
+    </div>
+    <div class="p-toolbar-group-right">
+      
+        <p-button  label="Logout" icon="pi pi-sign-in"  class="p-button-primary p-ml-2" severity="danger" routerLink="/admin/register"></p-button>
+    </div>
+  </p-toolbar>
+  
+  <p-sidebar [(visible)]="menuVisible" position="left" class="custom-sidebar">
+    <ul class="p-list">
+        <li>
+            <button pButton label="Surveys" icon="pi pi-home" class="p-button-text p-button-primary" routerLink="/get" (click)="toggleMenu()"></button>
+        </li>
+        <!-- <li>
+            <button pButton label="Create Survey"   icon="pi pi-chart-line" class="p-button-text p-button-primary" routerLink="/add" (click)="toggleMenu()"></button>
+        </li> -->
+      
+    </ul>
+  </p-sidebar>
+  
+  <div class="content" style="text-align: center; min-height: 600px;">
+    <router-outlet></router-outlet>
+  </div>
+  

@@ -1,0 +1,93 @@
+.card {
+    border: 0.5px solid #393d43;
+    padding: 60px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(4, 44, 240, 0.1);
+    max-width: 500px;
+    margin: 20px auto;
+    margin-top: 100px;
+  }
+  .password-container {
+    position: relative;
+}
+
+.password-container input {
+    padding-right: 2.5rem; /* Adjust padding to make space for the icon */
+}
+
+.password-container i {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888; /* Optional: change color of the icon */
+}
+  .flex {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .flex-row {
+    flex-direction: row;
+  }
+  
+  .align-items-center {
+    align-items: center;
+  }
+  
+  .justify-content-center {
+    justify-content: center;
+  }
+  
+  .gap-2 {
+    gap: 0.5rem;
+  }
+  
+  .gap-3 {
+    gap: 1rem;
+  }
+  
+  .w-6rem {
+    width: 6rem;
+  }
+  
+  .w-12rem {
+    width: 12rem;
+  }
+  
+  .w-10rem {
+    width: 10rem;
+  }
+  
+  .p-error {
+    color: red;
+  }
+  
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  input, label {
+    margin-bottom: 10px;
+  }
+  
+  button {
+    margin-top: 20px;
+  }
+  .total{
+   height: 500px;
+
+  .any{
+    display: inline;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    
+  }
+
+  }

@@ -1,0 +1,41 @@
+<p-toast></p-toast>
+
+<div class="no-survey">
+  <p-button type="button" id="create" icon="pi pi-plus" label="Create Survey" severity="success" routerLink="/add"></p-button>
+</div>
+<div class="noo-survey"  *ngIf="!surveys || surveys.length === 0">
+  <h1>{{ message }}</h1>
+</div>
+<div class="gett">
+  <div class="cards-container">
+    <div class="dashboard-card" *ngFor="let survey of surveys" (mouseleave)="closeMenu()">
+      <div [routerLink]="['/survey', survey.sid]" style="cursor: pointer;">
+        <h1>{{ survey.name }}</h1>
+      </div>
+      <button class="menu-button" (click)="toggleMenu(survey.id)">
+        <i class="pi pi-ellipsis-h"></i>
+      </button>
+      <div *ngIf="currentSurveyId === survey.id" class="menu-options">
+        <p-button [routerLink]="['/update', survey.sid]">
+          <i class="pi pi-pencil"></i>Edit
+        </p-button>
+        <p-button (click)="delete1(survey.sid)" severity="warning">
+          <i class="pi pi-trash"></i>Delete
+        </p-button>
+      </div>
+  
+      <p-dialog [style]="{width: '30rem'}" [(visible)]="visible22" [modal]="true">
+        <p>Are you sure want to delete?<br><br>
+          <p-button label="cancel" (click)="visible22 = false"></p-button>&nbsp;
+          <p-button label="delete" (click)="deleteSurvey(adminId)" severity="danger"></p-button>
+        </p>
+      </p-dialog>
+    </div>
+  
+    
+  </div>
+ 
+  
+</div>
+
+  
